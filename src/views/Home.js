@@ -1,7 +1,12 @@
-import React from 'react'
+import React from 'react';
+import { Container } from 'react-bootstrap';
+import '../assets/style/home.css';
+import Gallery from '../components/Gallery';
 function Home() {
-    return <div className='wrapper'>    
-            <h1>MyGallery</h1>
+    return <div className='homeWrap'>    
+            <Container> 
+                <Gallery/>
+            </Container>
     </div>
 }
 export default Home

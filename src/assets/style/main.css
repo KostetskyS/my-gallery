@@ -1,13 +1,25 @@
 body {
-    background-color: wheat;
+    background-image: url('../images/bg.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: rgb(143, 133, 133);
 }
-
+button {
+    width: 100px;
+    height: 50px;
+}
+body h1, h3{
+    color: rgb(250, 248, 248);
+}
 body a {
     text-decoration: none;
-    color: wheat;
+    color: rgb(243, 241, 236);
 }
-
+span {
+    color: rgb(250, 248, 248);
+    font-size: 22px;
+}
 body a:hover {
-    color: wheat;
+    color: rgb(243, 241, 236);
     opacity:60%;
 }

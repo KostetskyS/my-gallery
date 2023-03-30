@@ -10,24 +10,24 @@ export default function Рeader() {
     <Navbar collapseOnSelect expand='lg' bg='dark' variant='dark'>  
     <Container>
             <Navbar.Brand href='/'>  
-            <img 
-            src={logo} 
-            height='50'
-            width='50'
-            className='logo'
-            alt='logo'
-            />   
+              <img 
+              src={logo} 
+              height='50'
+              width='50'
+              className='logo'
+              alt='logo'
+              />   
             </Navbar.Brand> 
             <Navbar.Toggle aria-controls='responsive-navbar-nav'/>
-            <Navbar.Collapse id='responsive-navbar-nav'> 
-                <Nav className='mr-auto'>
-                    <Nav.Link className='headerMenuItem' ><Link to='/'>Home</Link></Nav.Link>  
-                    <Nav.Link className='headerMenuItem' ><Link to='/'>About</Link></Nav.Link>  
-                    <Nav.Link className='headerMenuItem' ><Link to='/'>Contacts</Link></Nav.Link>  
+            <Navbar.Collapse id='responsive-navbar-nav' className='justify-content-between'> 
+                <Nav className='column justify-content-start'>
+                      <Nav.Link as={Link} to="/">Home</Nav.Link> 
+                      <Nav.Link as={Link} to="/">About</Nav.Link> 
+                      <Nav.Link as={Link} to="/">Contacts</Nav.Link>
                 </Nav>
-                <Nav className='headerBtn'>
-                    <Button className="btn btn-secondary"><Link to='/logIn'>LOG IN</Link></Button>  
-                    <Button className="btn btn-secondary"><Link to='/register'>Register</Link></Button>  
+                <Nav className='column justify-content-end'>
+                      <Button className="btn btn-secondary"><Nav.Link as={Link} to="/logIn">Log In</Nav.Link></Button>
+                      <Button className="btn btn-secondary"><Nav.Link as={Link} to="/register">Register</Nav.Link></Button>
                 </Nav>
             </Navbar.Collapse> 
         </Container>

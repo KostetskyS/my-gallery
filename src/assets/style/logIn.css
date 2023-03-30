@@ -1,0 +1,19 @@
+.logInWrapp {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+.logInWrapp h3 {
+    margin-bottom: 30px;
+}
+.formLogIn {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+.formLogIn input {
+    max-width: 300px;
+    margin-bottom: 30px;
+}
