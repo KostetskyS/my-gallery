@@ -1,15 +1,15 @@
 import React from 'react';
 import '../assets/style/logIn.css';
 import { Button } from 'react-bootstrap'
+import Auth from '../components/Auth';
+
 function Register() {
-    return <div className='logInWrapp'>    
-                <h3>Register in the MyGallery</h3>
-                <form className='formLogIn'>  
-                    <input placeholder='Введите ваш логин'/>
-                    <input placeholder='Введите ваш пароль'/>
-                    <input placeholder='Повторите ваш пароль'/>
-                    <Button className="btn btn-secondary">Register</Button>
-                </form>
-            </div>
+
+    function submitHandler(data) {
+        console.log(data);
+        // fetch('http://localhost:8080/api/auth/sign-up') пост запрос
+    }
+
+    return <Auth isLogin={false} submitHandler={submitHandler}/>
 }
 export default Register
