@@ -1,15 +1,32 @@
 import React from 'react';
 import '../assets/style/logIn.css';
-import { Button } from 'react-bootstrap'
 import Auth from '../components/Auth';
+import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 function Register() {
+    const navigate = useNavigate();
 
-    function submitHandler(data) {
-        console.log(data);
-        // fetch('http://localhost:8080/api/auth/sign-up') пост запрос
+    async function submitHandler(data) {
+        if(data.password === data.password2) {
+            const response = await axios.post('http://localhost:8080/api/auth/sign-up', data)
+            .then(async function (response) {
+                
+                console.log(response.data, "data")
+                if(response.data.success) {
+                    navigate('/logIn');
+                }
+            }).catch(function(error){
+                console.log(error)
+            })
+        } else {
+            alert('Пароли не совпадают')
+        }
+            
     }
 
-    return <Auth isLogin={false} submitHandler={submitHandler}/>
+    return <div>    
+        <Auth isLogin={false} submitHandler={submitHandler}/>  
+    </div> 
 }
 export default Register

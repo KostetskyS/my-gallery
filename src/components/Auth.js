@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import '../assets/style/logIn.css';
 import { useForm } from 'react-hook-form';
+
+
 
 function Auth({ isLogin, submitHandler }) {
     const {  
@@ -13,9 +15,8 @@ function Auth({ isLogin, submitHandler }) {
         }, 
         handleSubmit,
        } = useForm({ mode: 'onBlur' });
-       
-    //   function onSubmit(data) {
-    //     console.log(data)
+
+    //   function submitHandler(data) {
     //     reset()
     //   }
     
@@ -40,6 +41,10 @@ function Auth({ isLogin, submitHandler }) {
                             minLength: {
                                 value: 8,
                                 message: 'password must contain 8 characters',
+                            },
+                            maxLength: {
+                                value: 24,
+                                message: 'password cannot contain more than 24 characters',
                             }
                         })}
                          type='password'
@@ -47,8 +52,6 @@ function Auth({ isLogin, submitHandler }) {
                         <div>   
                             {errors?.password && <p style={{color: 'white'}}>{errors?.password?.message}</p>}
                         </div>
-
-
                         {!isLogin && (
                             <>
                               <input
@@ -57,6 +60,10 @@ function Auth({ isLogin, submitHandler }) {
                                     minLength: {
                                         value: 8,
                                         message: 'password must contain 8 characters',
+                                    },
+                                    maxLength: {
+                                        value: 24,
+                                        message: 'password cannot contain more thasn 24 characters',
                                     }
                                 })}
                                 type='password'
@@ -65,8 +72,13 @@ function Auth({ isLogin, submitHandler }) {
                               <div>   
                                   {errors?.password && <p style={{color: 'white'}}>{errors?.password2?.message}</p>}
                               </div>
+                              <div>
+                              {errors.password !== errors.password2 &&  <p style={{color: 'white'}}>{errors?.password2?.message}</p>};  
+                              </div>
+                                
                               <Button type='submit' className="btn btn-secondary" disabled={!isValid}>Register</Button>
                             </>
+                            
                         )}
 
                         {isLogin && <Button type='submit' className="btn btn-secondary" disabled={!isValid}>Log In</Button>}

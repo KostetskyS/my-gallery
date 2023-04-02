@@ -14,7 +14,7 @@ function Gallery() {
         <Row>
           {images.map((image) => (
             <Col key={image.id} md={4} sm={6} xs={12}>
-              <Image src={image.src} alt={image.alt} fluid />
+              
             </Col>
           ))}
         </Row>
