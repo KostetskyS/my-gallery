@@ -20,7 +20,7 @@ function Register() {
                 console.log(error)
             })
         } else {
-            alert('Пароли не совпадают')
+            alert('Password mismatch')
         }
             
     }

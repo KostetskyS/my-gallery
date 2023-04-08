@@ -14,10 +14,10 @@ function LogIn() {
             .then(async function (response) {
                 console.log(response.data, "data")
                 if(response.data.success) {
-                    navigate('/');
+                    navigate('/home');
                 }
             }).catch(function(error){
-                console.log(error)
+                alert('User is not found')
             })
     }
     return <Auth isLogin={true} submitHandler={submitHandler} />
