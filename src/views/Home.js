@@ -4,7 +4,7 @@ import '../assets/style/home.css';
 import Gallery from '../components/Gallery';
 
 function Home() {
-    return <div className='homeWrap'>    
+    return <div className='homeWrap'>   
             <Container> 
                 <Gallery/>
             </Container>

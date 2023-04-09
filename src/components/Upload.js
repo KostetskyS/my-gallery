@@ -1,13 +1,19 @@
 import React from "react";
 import { Form, Button } from "react-bootstrap";
+
 function Upload({ onUpload }) {
+
     const handleUpload = (event) => {
+
       const file = event.target.files[0];
       const reader = new FileReader();
+
       reader.onloadend = () => {
         onUpload(reader.result);
       };
+      
       reader.readAsDataURL(file);
+
     };
   
     return (

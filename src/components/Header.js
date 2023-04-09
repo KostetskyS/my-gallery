@@ -1,16 +1,35 @@
 import React from 'react';
 import {Container, Navbar, Nav, Button} from 'react-bootstrap';
+import { useNavigate } from "react-router-dom";
 import logo from '../assets/images/logo.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../assets/style/header.css';
 import { Link } from 'react-router-dom';
 
  function Header() {
-  const logged = true;
+  const navigate = useNavigate();
+  const token = localStorage.getItem('authToken');
+  let auth = false;
+  console.log(auth, 'auth')
+
+  if (token !== '' || token !== null) {
+    auth = true;
+  } 
+
+  if (token == null) {
+    auth = false;
+  }
+
+  function handleLogOut() {
+    localStorage.removeItem('authToken');
+    navigate('/login')
+    console.log(token);
+  }
+
   return (
     <Navbar collapseOnSelect expand='lg' bg='dark' variant='dark'>  
     <Container>
-            <Navbar.Brand href='/'>  
+            <Navbar.Brand href='/home'>  
               <img 
               src={logo} 
               height='50'
@@ -23,12 +42,20 @@ import { Link } from 'react-router-dom';
             <Navbar.Collapse id='responsive-navbar-nav' className='justify-content-between'> 
                 <Nav className='column justify-content-start'>
                       <Nav.Link as={Link} to="/home">Home</Nav.Link> 
-                      <Nav.Link as={Link} to="/">About</Nav.Link> 
-                      <Nav.Link as={Link} to="/">Contacts</Nav.Link>
+                      <Nav.Link as={Link} to="/about">About</Nav.Link> 
+                      <Nav.Link as={Link} to="/contacts">Contacts</Nav.Link>
                 </Nav>
                 <Nav className='column justify-content-end'>
-                  <Button className="btn btn-secondary"><Nav.Link as={Link} to="/logIn">Log In</Nav.Link></Button>
-                  <Button className="btn btn-secondary"><Nav.Link as={Link} to="/register">Register</Nav.Link></Button>    
+                  {!auth && 
+                  <>  
+                      <Button className="btn btn-secondary"><Nav.Link as={Link} to="/logIn">Log In</Nav.Link></Button>
+                      <Button className="btn btn-secondary"><Nav.Link as={Link} to="/register">Register</Nav.Link></Button> 
+                  </>}
+                  {auth && 
+                  <>  
+                      <Button onClick={handleLogOut} className="btn btn-secondary">LogOut</Button> 
+                  </>}
+                      
                 </Nav>
             </Navbar.Collapse> 
         </Container>

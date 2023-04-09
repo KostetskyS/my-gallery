@@ -1,10 +1,14 @@
 import React from "react";
-import { Container, Row, Col, Image } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 import { nanoid } from "nanoid";
 import Upload from "./Upload";
+
 function Gallery() {
     function id() {
        return nanoid(10);
+    }
+    function qwe(data) {
+      console.log(data);
     }
     const images = [
       { id: id(), src: '../assets/images/logo.png', alt: 'Image 1' },
@@ -18,7 +22,7 @@ function Gallery() {
             </Col>
           ))}
         </Row>
-        <Upload/>
+        <Upload onUpload={qwe}/>
       </Container>
     );
   }
