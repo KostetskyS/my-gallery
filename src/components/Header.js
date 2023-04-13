@@ -10,8 +10,7 @@ import { Link } from 'react-router-dom';
   const navigate = useNavigate();
   const token = localStorage.getItem('authToken');
   let auth = false;
-  console.log(auth, 'auth')
-
+ 
   if (token !== '' || token !== null) {
     auth = true;
   } 
@@ -29,7 +28,7 @@ import { Link } from 'react-router-dom';
   return (
     <Navbar collapseOnSelect expand='lg' bg='dark' variant='dark'>  
     <Container>
-            <Navbar.Brand href='/home'>  
+            <Navbar.Brand href='/createPhoto'>  
               <img 
               src={logo} 
               height='50'
@@ -41,7 +40,9 @@ import { Link } from 'react-router-dom';
             <Navbar.Toggle aria-controls='responsive-navbar-nav'/>
             <Navbar.Collapse id='responsive-navbar-nav' className='justify-content-between'> 
                 <Nav className='column justify-content-start'>
-                      <Nav.Link as={Link} to="/home">Home</Nav.Link> 
+                      <Nav.Link as={Link} to="/createPhoto">Home</Nav.Link> 
+                      <Nav.Link as={Link} to="/albums">Albums</Nav.Link> 
+                      <Nav.Link as={Link} to="/photos">Photos</Nav.Link> 
                       <Nav.Link as={Link} to="/about">About</Nav.Link> 
                       <Nav.Link as={Link} to="/contacts">Contacts</Nav.Link>
                 </Nav>

@@ -12,7 +12,7 @@ function LogIn() {
             .then(async function (response) {
                 console.log(response.data, "data");
                 if(response.data.success) {
-                    navigate('/home');
+                    navigate('/createPhoto');
                     localStorage.setItem('authToken', response.data.data.token);
                 }
             }).catch(function(error){
