@@ -7,3 +7,21 @@
     margin-bottom: 20px;
     max-width: 350px;
 }
+.albums-form {
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+    align-items: center;
+}
+.row {
+    justify-content: center;
+}
+input {
+    margin-bottom: 15px;
+}
+.photos-form {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    align-items: center;
+}

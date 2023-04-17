@@ -1,27 +1,20 @@
 import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
-
+import { customFetch } from "../helpers/customFetch";
+import '../assets/style/imagesUpload.css';
 function CreatePhoto({ isAlbum }) {
+
   const [selectedFile, setSelectedFile] = useState(null);
   const [uploaded, setUploaded] = useState();
-
   const handleUpload = async (event) => {
+
     event.preventDefault(); 
-
+    
     const formData = new FormData();
-
     formData.append('image', selectedFile);
     formData.append('title', 'albumName'); 
     // 
-
-    const token = localStorage.getItem('authToken');
-    const res = await fetch('http://localhost:8080/api/albums/create', {
-      headers: {
-        'Authorization' : 'Bearer ' + token
-      },
-      method: 'POST',
-      body: formData,
-    });
+    const res = customFetch;
     const data = await res.json();
 
     setUploaded(data);
@@ -33,10 +26,20 @@ function CreatePhoto({ isAlbum }) {
 
   return (
     <>
-      <Form onSubmit={handleUpload}> 
+     {isAlbum && (  
+          <Form className="albums-form" onSubmit={handleUpload}> 
+            <Form.Label>Create album</Form.Label>
+            <input placeholder="create album name"/>
+            <input placeholder="create album description"/>  
+            <Button className="btn btn-secondary" type="submit">Add</Button>
+          </Form>
+     ) }
+      {!isAlbum && (  
+        <>  
+          <Form className="photos-form" onSubmit={handleUpload}> 
+          <Form.Label>Upload photo</Form.Label>
         <Form.Group controlId="formFile">
-        {isAlbum && <Form.Label>Upload album</Form.Label>}
-        {!isAlbum && <Form.Label>Upload photo</Form.Label>}
+       
           <Form.Control 
             multiple
             type="file" 
@@ -44,13 +47,13 @@ function CreatePhoto({ isAlbum }) {
             accept='image/*,.png,.jpg,.gif,.web'
           />
         </Form.Group>
+        <input placeholder="create album name"/>
+        <input placeholder="create album description"/>
         <Button className="btn btn-secondary" type="submit">Upload</Button>
-        {isAlbum && <input placeholder="create album name"/>}
-        {isAlbum && <input placeholder="create album description"/>}
-        {!isAlbum && <input placeholder="create photo name"/>}
-        {!isAlbum && <input placeholder="create photo description"/>}
-        
       </Form>
+        </>
+      ) }
+    
       {uploaded && (
         <div>
           lastModifiedData: {''}

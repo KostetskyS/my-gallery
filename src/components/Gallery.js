@@ -4,9 +4,7 @@ import CreatePhoto from "../views/CreatePhoto";
 
 function Gallery() {
     return (
-      <Container>
-        <Row>
-        </Row>
+      <Container className='column justify-content-start'>
         <CreatePhoto/>
       </Container>
     );

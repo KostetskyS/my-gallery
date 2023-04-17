@@ -39,8 +39,7 @@ import { Link } from 'react-router-dom';
             </Navbar.Brand> 
             <Navbar.Toggle aria-controls='responsive-navbar-nav'/>
             <Navbar.Collapse id='responsive-navbar-nav' className='justify-content-between'> 
-                <Nav className='column justify-content-start'>
-                      <Nav.Link as={Link} to="/createPhoto">Home</Nav.Link> 
+                <Nav className='column justify-content-start'> 
                       <Nav.Link as={Link} to="/albums">Albums</Nav.Link> 
                       <Nav.Link as={Link} to="/photos">Photos</Nav.Link> 
                       <Nav.Link as={Link} to="/about">About</Nav.Link> 

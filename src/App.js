@@ -3,7 +3,6 @@ import '../src/assets/style/main.css'
 import React from 'react';
 import LogIn  from './views/LogIn';
 import  Register   from './views/Register';
-import  CreatePhoto  from './views/CreatePhoto';
 import Header from './components/Header';
 import About from './views/About';
 import Contacts from './views/Contacts';
@@ -21,7 +20,6 @@ function App() {
         <Header/>
          <Routes>  
               <Route element={<PrivateRoute/>}> 
-                <Route exact path='/createPhoto' element={<CreatePhoto/>}/>
                 <Route exact path='/albums' element={<Albums/>}/>
                 <Route exact path='/photos' element={<Photos/>}/>
               </Route>
