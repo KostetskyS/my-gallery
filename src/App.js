@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../src/assets/style/main.css'
+import '../src/assets/style/main.css';
 import React from 'react';
 import LogIn  from './views/LogIn';
 import  Register   from './views/Register';
