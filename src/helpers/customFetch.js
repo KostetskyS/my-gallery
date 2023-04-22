@@ -1,9 +1,8 @@
-export const customFetch = async(url) => {
+export const customFetch = async(url, formData) => {
   
-  const formData = new FormData();
   const token = localStorage.getItem('authToken');
   
-  await fetch(`http://localhost:8080/api/${url}`, {
+  return await fetch(`http://localhost:8080/api${url}`, {
       headers: {
         'Authorization' : 'Bearer ' + token
       },

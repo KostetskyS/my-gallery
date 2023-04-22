@@ -28,7 +28,7 @@ import { Link } from 'react-router-dom';
   return (
     <Navbar collapseOnSelect expand='lg' bg='dark' variant='dark'>  
     <Container>
-            <Navbar.Brand href='/albums'>  
+            <Navbar.Brand href='/'>  
               <img 
               src={logo} 
               height='50'
