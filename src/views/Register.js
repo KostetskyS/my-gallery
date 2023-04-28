@@ -9,7 +9,7 @@ function Register() {
 
     async function submitHandler(data) {
         if(data.password === data.password2) {
-            const response = await axios.post('http://localhost:8080/api/auth/sign-up', data)
+            await axios.post('http://localhost:8080/api/auth/sign-up', data)
             .then(async function (response) {
                 
                 console.log(response.data, "data")

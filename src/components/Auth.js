@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import '../assets/style/logIn.css';
 import { useForm } from 'react-hook-form';
@@ -6,7 +5,6 @@ import { useForm } from 'react-hook-form';
 function Auth({ isLogin, submitHandler }) {
     const {  
         register,
-        reset,
         formState: {
             errors,
             isValid,
@@ -23,7 +21,7 @@ function Auth({ isLogin, submitHandler }) {
             {...register('email', { pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/ } 
             )}
             type='email'
-            placeholder='Введите ваш логин'
+            placeholder='type your email'
             />
             <div>   
                 {errors?.email && <p style={{color: 'white'}}>Incorrect email</p>}
@@ -42,7 +40,7 @@ function Auth({ isLogin, submitHandler }) {
             }
             })}
             type='password'
-            placeholder='Введите ваш пароль'/>
+            placeholder='type your password'/>
 
             <div>   
                 {errors?.password && <p style={{color: 'white'}}>{errors?.password?.message}</p>}
@@ -63,7 +61,7 @@ function Auth({ isLogin, submitHandler }) {
                         }
                         })}
                         type='password'
-                        placeholder='Повторите пароль'
+                        placeholder='repeat password'
                         />
 
                     <div>   

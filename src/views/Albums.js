@@ -1,44 +1,53 @@
 import React from 'react';
 import '../assets/style/main.css';
+import '../assets/style/albumsGrid.css';
 import CreatePhoto from '../components/CreatePhoto';
 import { Container, Row } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import { getAlbum } from '../helpers/getAlbum';
+import { useNavigate } from "react-router-dom";
 
 export const Albums = () => {
   const [album, setAlbum] = useState('');
-
+  const navigate = useNavigate();
+  
   useEffect(() => {
 
-  async function showAlbums(data) {
+  async function showAlbums() {
 
+    function inAlbum( ) {
+    navigate("/photos");
+
+  }
     try {
+
       const response = await getAlbum('/albums');
       const albums = response.data.data.map((album) => (
-        <div key={album._id}> 
-          <h3>{album.title}</h3>
-          <h4>{album.description}</h4>
-          <img width='50px' height='50px' src={album.image.img_link}/>
+        <div onClick={inAlbum} className='album' key={album._id}> 
+          <h4 className='albumTitle'>{album.title}</h4>
+          <img className='albumImg' src={album.image.img_link} alt=''/>
+          <p>{album.description}</p>
         </div>
       ));
       setAlbum(albums);
+
     } catch (error) {
       alert('Albums is not found');
     }
+
   }
   showAlbums();
+  
 }, []);
 
   return (
     <Container className='photo-container'>
-      <Row>
+      <Row className='addAlbums'>
         <CreatePhoto showAlbums={useEffect} isAlbum={true}/>
-        <h3>Albums</h3>
+        <h3 className='albumTitle'>Albums</h3>
       </Row>
-      <Row>
-        <div className='albumsMain'>  
-        {album}  
-        </div>
+      <Row className='albums'>
+        {album}
       </Row>
     </Container>
   )

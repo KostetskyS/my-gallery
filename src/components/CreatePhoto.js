@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Form, Button, Modal, ModalHeader, ModalBody } from "react-bootstrap";
 import { customFetch } from "../helpers/customFetch";
 import '../assets/style/imagesUpload.css';
+
 function CreatePhoto({ isAlbum }) {
 
   const [selectedFile, setSelectedFile] = useState(null);
@@ -24,7 +25,6 @@ function CreatePhoto({ isAlbum }) {
   
   const handleUpload = async (event) => {
     event.preventDefault(); 
-
     const url = '/albums/create';
     const formData = new FormData();
     formData.append('image', selectedFile);
@@ -33,14 +33,14 @@ function CreatePhoto({ isAlbum }) {
     const res = await customFetch(url, formData);
     const data = await res.json();
     setUploaded(data);
-    
   };
-
   const handleFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
   };
  
-
+if (uploaded) {
+    window.location.reload();
+}
   return (
 <>
        {!isAlbum && (  
@@ -90,8 +90,8 @@ function CreatePhoto({ isAlbum }) {
                 accept='image/*,.png,.jpg,.gif,.web'
               />
             </Form.Group> 
-            <input name="albumName" placeholder="create album name" value={albumName} onChange={handleAlbumNameChange}/>
-            <input name="albumDesc" placeholder="create album description" value={albumDesc} onChange={handleAlbumDescChange}/>  
+            <input maxLength='9' name="albumName" placeholder="create album name" value={albumName} onChange={handleAlbumNameChange}/>
+            <input maxLength='30' name="albumDesc" placeholder="create album description" value={albumDesc} onChange={handleAlbumDescChange}/>  
             <Button className="btn btn-secondary" type="submit">Add</Button>
           </Form>
     
