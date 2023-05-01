@@ -13,7 +13,6 @@ useEffect(() => {
     try {
 
       const response = await getAlbum('/photos/album?album_id=${album_id}');
-      console.log(response);
       const photos = response.data.data.map((photo) => (
         <div className='album' key={photo._id}> 
           <h4 className='albumTitle'>{photo.title}</h4>
