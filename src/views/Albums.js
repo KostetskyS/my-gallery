@@ -14,20 +14,21 @@ export const Albums = () => {
   useEffect(() => {
 
   async function showAlbums() {
-
-    function inAlbum( ) {
-    navigate("/photos");
+    function inAlbum(album) {
+    navigate(`/albums/photos/${album._id}`);
 
   }
     try {
 
       const response = await getAlbum('/albums');
       const albums = response.data.data.map((album) => (
-        <div onClick={inAlbum} className='album' key={album._id}> 
+
+        <div onClick={() => inAlbum(album)} className='album' key={album._id}> 
           <h4 className='albumTitle'>{album.title}</h4>
           <img className='albumImg' src={album.image.img_link} alt=''/>
           <p>{album.description}</p>
         </div>
+
       ));
       setAlbum(albums);
 

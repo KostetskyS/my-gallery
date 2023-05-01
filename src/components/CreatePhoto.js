@@ -19,11 +19,24 @@ function CreatePhoto({ isAlbum }) {
 
 }
 
+const [photoName, setPhotoName] = useState('');
+  const [photoDesc, setPhotoDesc] = useState('');
+
+  const handlePhotoNameChange = (event) => {
+    setPhotoName(event.target.value);
+  };
+
+  const handlePhotoDescChange = (event) => {
+    setPhotoDesc(event.target.value);
+
+}
+
+
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   
-  const handleUpload = async (event) => {
+  const handleUploadAlbum = async (event) => {
     event.preventDefault(); 
     const url = '/albums/create';
     const formData = new FormData();
@@ -34,6 +47,21 @@ function CreatePhoto({ isAlbum }) {
     const data = await res.json();
     setUploaded(data);
   };
+
+  const handleUploadPhoto = async (event) => {
+    event.preventDefault(); 
+    const url = '/photos/create';
+    const formData = new FormData();
+    formData.append('album_id', 'albumId'); // тут нужно получить айдиАльбома ////
+    formData.append('image', selectedFile);
+    formData.append('title', photoName);
+    formData.append('description', photoDesc);
+    const res = await customFetch(url, formData);
+    const data = await res.json();
+    setUploaded(data);
+    console.log(data);
+  };
+
   const handleFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
   };
@@ -52,7 +80,7 @@ if (uploaded) {
         </ModalHeader> 
 
         <ModalBody> 
-          <Form className="photos-form" onSubmit={handleUpload}> 
+          <Form className="photos-form" onSubmit={handleUploadPhoto}> 
           <Form.Label>Upload photo</Form.Label>
         <Form.Group controlId="formFile">
           <Form.Control 
@@ -62,8 +90,8 @@ if (uploaded) {
             accept='image/*,.png,.jpg,.gif,.web'
           />
         </Form.Group>
-        <input placeholder="create photo name"/>
-        <input placeholder="create photo description"/>
+        <input name="photoName" placeholder="create photo name" value={photoName} onChange={handlePhotoNameChange}/>
+        <input name="photoDesc" placeholder="create photo description" value={photoDesc} onChange={handlePhotoDescChange}/>
         <Button className="btn btn-secondary" type="submit">Upload</Button>
       </Form>
       </ModalBody>
@@ -80,7 +108,7 @@ if (uploaded) {
           <Modal.Title>Create album</Modal.Title>
         </ModalHeader>
         <ModalBody> 
-          <Form className="albums-form" onSubmit={handleUpload}>
+          <Form className="albums-form" onSubmit={handleUploadAlbum}>
             <Form.Label>Create album</Form.Label>
             <Form.Group controlId="formFile">
               <Form.Control 

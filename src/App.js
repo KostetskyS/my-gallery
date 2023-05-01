@@ -21,7 +21,7 @@ function App() {
          <Routes>  
               <Route element={<PrivateRoute/>}> 
                 <Route exact path='/' element={<Albums/>}/>
-                <Route exact path='/photos' element={<Photos/>}/>
+                <Route exact path='/albums/photos/:albumId' element={<Photos/>}/> 
               </Route>
               <Route element={<UnAuthRoute/>}> 
                 <Route path='/logIn' element={<LogIn/>}/>

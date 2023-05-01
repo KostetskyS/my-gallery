@@ -6,7 +6,7 @@ export const getAlbum = async (url) => {
 
   return await axios(`http://localhost:8080/api${url}`, {
     headers: {
-      'Authorization' : 'Bearer ' + token
+      'Authorization' : 'Bearer ' + token,
     },
     method: 'GET',
   })
