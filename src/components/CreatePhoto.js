@@ -3,12 +3,16 @@ import { Form, Button, Modal, ModalHeader, ModalBody } from "react-bootstrap";
 import { customFetch } from "../helpers/customFetch";
 import '../assets/style/imagesUpload.css';
 
-function CreatePhoto({ isAlbum }) {
 
+function CreatePhoto({ isAlbum, album }) {
   const [selectedFile, setSelectedFile] = useState(null);
   const [uploaded, setUploaded] = useState();
   const [albumName, setAlbumName] = useState('');
   const [albumDesc, setAlbumDesc] = useState('');
+  console.log(album, 'album')
+
+  
+ 
 
   const handleAlbumNameChange = (event) => {
     setAlbumName(event.target.value);
@@ -30,13 +34,12 @@ const [photoName, setPhotoName] = useState('');
     setPhotoDesc(event.target.value);
 
 }
-
-
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  
+
   const handleUploadAlbum = async (event) => {
+   
     event.preventDefault(); 
     const url = '/albums/create';
     const formData = new FormData();
@@ -48,27 +51,29 @@ const [photoName, setPhotoName] = useState('');
     setUploaded(data);
   };
 
-  const handleUploadPhoto = async (event) => {
+  const handleUploadPhoto = async (event, albumId) => {
+    
     event.preventDefault(); 
     const url = '/photos/create';
     const formData = new FormData();
-    formData.append('album_id', 'albumId'); // тут нужно получить айдиАльбома ////
+    formData.append('album_id', albumId); // тут нужно получить айдиАльбома ////
     formData.append('image', selectedFile);
     formData.append('title', photoName);
     formData.append('description', photoDesc);
     const res = await customFetch(url, formData);
     const data = await res.json();
     setUploaded(data);
-    console.log(data);
+    
   };
 
   const handleFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
   };
  
-if (uploaded) {
-    window.location.reload();
-}
+// if (uploaded) {
+//     window.location.reload();
+// }
+
   return (
 <>
        {!isAlbum && (  
