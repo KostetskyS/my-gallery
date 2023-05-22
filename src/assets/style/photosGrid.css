@@ -1,0 +1,20 @@
+.photos {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 900px;
+}
+
+.photo h4 {
+    font-size: 30px;
+}
+.photo p {
+    font-size: 20px;
+}
+.photoPic {
+    margin-bottom: 40px;
+    min-width: 300px;
+    border-radius: 4px;
+    border: 1px solid black;
+
+}

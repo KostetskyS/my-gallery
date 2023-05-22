@@ -6,57 +6,46 @@ import { Container, Row } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import { getAlbum } from '../helpers/getAlbum';
 import { useNavigate } from "react-router-dom";
-import { useParams } from 'react-router-dom';
 
 export const Albums = () => {
-  const { id } = useParams();
-  console.log(id)
-  const [album, setAlbum] = useState('');
+  const [albums, setAlbums] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
-  
-  useEffect(() => {
 
-   
-  async function showAlbums() {
-
-    function inAlbum(album) {
-      console.log(album, 'album')
-    navigate(`/albums/photos/${album._id}`);
-
+  function goToTheAlbum(album) {
+      navigate(`/albums/photos/${album._id}`);
   }
-  
-    try {
 
-      const response = await getAlbum('/albums');
-      const albums = response.data.data.map((album) => (
-      
-        <div onClick={() => inAlbum(album)} className='album' key={album._id}> 
-          <h4 className='albumTitle'>{album.title}</h4>
-          <img className='albumImg' src={album.image.img_link} alt=''/>
-          <p>{album.description}</p>
-        </div>
-
-      ));
-      console.log(album, 'album')
-      setAlbum(albums);
-
-    } catch (error) {
-      alert('Albums is not found');
-    }
-
+  const fetchAlbums = async () => {
+      try {
+          setIsLoading(true)
+          const response = await getAlbum('/albums');
+          setAlbums(response.data.data);
+      } catch (error) {
+          alert('Albums is not found');
+      } finally {
+          setIsLoading(false)
+      }
   }
-  showAlbums();
-  
-}, []);
+
+  useEffect(function() {fetchAlbums()}, []);
 
   return (
     <Container className='photo-container'>
       <Row className='addAlbums'>
-        <CreatePhoto showAlbums={useEffect} isAlbum={true} album={album}/>
+        <CreatePhoto isAlbum={true}/>
         <h3 className='albumTitle'>Albums</h3>
       </Row>
       <Row className='albums'>
-        {album}
+        {!isLoading && albums.length > 0 && albums.map((album) => (
+            <div onClick={() => goToTheAlbum(album)} className='album' key={album._id}>
+              <h4 className='albumTitle'>{album.title}</h4>
+              <img className='albumImg' src={album.image.img_link} alt=''/>
+              <p>{album.description}</p>
+          </div>
+        ))}
+          {!isLoading && albums.length === 0 && <p>Альбомов нет</p>}
+          {isLoading && <p>Загрузка альбомов..</p>}
       </Row>
     </Container>
   )

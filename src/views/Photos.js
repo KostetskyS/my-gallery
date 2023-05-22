@@ -1,46 +1,47 @@
 import React from 'react';
 import CreatePhoto from '../components/CreatePhoto';
+import '../assets/style/photosGrid.css';
 import { Container, Row } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import { getAlbum } from '../helpers/getAlbum';
+import { useParams } from 'react-router-dom';
 
 export const Photos = () => {
-const [photo, setPhoto] = useState('');
+  const [photos, setPhotos] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const { albumId } = useParams(); 
 
-useEffect(() => {
-
- async function showPhotos() {
+  const fetchPhotos = async () => {
     try {
-
-      const response = await getAlbum('/photos/album?album_id=${album_id}');
-      const photos = response.data.data.map((photo) => (
-        <div className='album' key={photo._id}> 
-          <h4 className='albumTitle'>{photo.title}</h4>
-          <img className='albumImg' src={photo.image.img_link} alt=''/>
-          <p>{photo.description}</p>
-        </div>
-      ));
-      setPhoto(photos);
-      
+      setIsLoading(true);
+      const response = await getAlbum(`/photos/album?album_id=${albumId}`);
+      setPhotos(response.data.data);
     } catch (error) {
-      alert('Photos is not found');
+      alert('Photos are not found');
+    } finally {
+      setIsLoading(false);
     }
   }
 
-  showPhotos();
-  
-}, []);
+  useEffect(() => {fetchPhotos()}, []); 
 
   return (
     <Container className='photo-container'>
-        <Row>
-           <CreatePhoto showPhotos={useEffect} isAlbum={false}/>
-           <h3>Photos</h3>
-        </Row>
-        <Row className='albums'>
-        {photo}
+      <Row className='addAlbums'>
+        <CreatePhoto onCreate={fetchPhotos} isAlbum={false}/>
+        <h3 className='albumTitle'>Photos</h3>
+      </Row>
+      <Row className='photos'>
+        {!isLoading && photos.length > 0 && photos.map((photo) => (
+          <div className='photo' key={photo._id}>
+            <h4 className='albumTitle'>Photo title: {photo.title}</h4>
+            <img className='photoPic' src={photo.image_link} alt=''/>
+            <p>Photo description: {photo.description}</p>
+          </div>
+        ))}
+        {!isLoading && photos.length === 0 && <p>No photos available</p>}
+        {isLoading && <p>Loading photos...</p>}
       </Row>
     </Container>
-    
-  )
+  );
 }
