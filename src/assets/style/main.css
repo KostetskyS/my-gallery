@@ -1,8 +1,8 @@
 body {
     background-image: url('../images/bg.png');
-    background-size: cover;
-    background-repeat: repeat;
-    background-color: rgb(15, 13, 13);
+    background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
 }
 button {
     min-width: 80px;

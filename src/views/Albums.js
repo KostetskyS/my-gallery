@@ -6,6 +6,8 @@ import { Container, Row } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import { getAlbum } from '../helpers/getAlbum';
 import { useNavigate } from "react-router-dom";
+import { BiTrash } from 'react-icons/bi';
+import { deleteItem } from '../helpers/deleteItem';
 
 export const Albums = () => {
   const [albums, setAlbums] = useState([]);
@@ -28,19 +30,33 @@ export const Albums = () => {
       }
   }
 
+  const deleteAlbum = async (albumId) => {
+  
+    try {
+      const response = await deleteItem('/albums/delete', albumId);
+      console.log(response) 
+     
+    } catch (error) {
+      alert('Photos are not found');
+    } finally {
+      alert('dsad')
+    }
+    
+  }
+
   useEffect(function() {fetchAlbums()}, []);
 
   return (
     <Container className='photo-container'>
       <Row className='addAlbums'>
-        <CreatePhoto isAlbum={true}/>
+        <CreatePhoto onCreate={fetchAlbums} isAlbum={true}/>
         <h3 className='albumTitle'>Albums</h3>
       </Row>
       <Row className='albums'>
         {!isLoading && albums.length > 0 && albums.map((album) => (
-            <div onClick={() => goToTheAlbum(album)} className='album' key={album._id}>
-              <h4 className='albumTitle'>{album.title}</h4>
-              <img className='albumImg' src={album.image.img_link} alt=''/>
+            <div className='album' key={album._id}>
+              <h4 className='albumTitle'>{album.title} <BiTrash className='trash' onClick={() => deleteAlbum(album._id)}/></h4>
+              <img className='albumImg' onClick={() => goToTheAlbum(album)} src={album.image.img_link} alt=''/>
               <p>{album.description}</p>
           </div>
         ))}

@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import { Form, Button, Modal, ModalHeader, ModalBody } from "react-bootstrap";
 import '../assets/style/imagesUpload.css';
 import { useParams } from 'react-router-dom';
-
+import { customFetch } from '../helpers/customFetch'
 
 function CreatePhoto({ isAlbum, onCreate }) {
   const [selectedFile, setSelectedFile] = useState(null);
+  const [uploaded, setUploaded] = useState();
   const [albumName, setAlbumName] = useState('');
   const [albumDesc, setAlbumDesc] = useState('');
   const handleAlbumNameChange = (event) => {
@@ -35,11 +36,18 @@ const [photoDesc, setPhotoDesc] = useState('');
   const handleUploadAlbum = async (event) => {
    
     event.preventDefault(); 
+
+    const url = '/albums/create';
+
     const formData = new FormData();
     formData.append('image', selectedFile);
     formData.append('title', albumName);
     formData.append('description', albumDesc);
-    
+
+    const res = await customFetch(url, formData);
+    const data = await res.json();
+    setUploaded(data);
+
     onCreate();
     handleClose();
   };
@@ -50,11 +58,18 @@ const [photoDesc, setPhotoDesc] = useState('');
 
   const handleUploadPhoto = async (event) => {
     event.preventDefault(); 
+
+    const url = '/photos/create';
+
     const formData = new FormData();
     formData.append('album_id', albumId); 
     formData.append('image', selectedFile);
     formData.append('title', photoName);
     formData.append('description', photoDesc);
+
+    const res = await customFetch(url, formData);
+    const data = await res.json();
+    setUploaded(data);
   
     onCreate();
     handleClose();
