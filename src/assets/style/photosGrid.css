@@ -5,7 +5,6 @@
     padding: 15px;
     margin-bottom: 40px;
     text-align: center;
-    width: 300px;
 }
 .photo h4 {
     font-size: 30px;
@@ -15,9 +14,8 @@
 }
 .photoPic {
     margin-bottom: 40px;
-    width: 250px;
+    width: 400px;
     border-radius: 4px;
-    
 }
 .btn-danger {
     border-radius: 50px;

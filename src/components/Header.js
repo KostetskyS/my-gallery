@@ -21,8 +21,7 @@ import { Link } from 'react-router-dom';
 
   function handleLogOut() {
     localStorage.removeItem('authToken');
-    navigate('/login')
-    console.log(token);
+    navigate('/login');
   }
 
   return (
@@ -52,8 +51,7 @@ import { Link } from 'react-router-dom';
                   {auth && 
                   <>  
                       <Button onClick={handleLogOut} className="btn btn-secondary">LogOut</Button> 
-                  </>}
-                      
+                  </>} 
                 </Nav>
             </Navbar.Collapse> 
         </Container>

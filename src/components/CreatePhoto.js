@@ -27,27 +27,22 @@ const [photoDesc, setPhotoDesc] = useState('');
 
   const handlePhotoDescChange = (event) => {
     setPhotoDesc(event.target.value);
-
 }
+
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   const handleUploadAlbum = async (event) => {
-   
     event.preventDefault(); 
-
     const url = '/albums/create';
-
     const formData = new FormData();
     formData.append('image', selectedFile);
     formData.append('title', albumName);
     formData.append('description', albumDesc);
-
     const res = await customFetch(url, formData);
     const data = await res.json();
     setUploaded(data);
-
     onCreate();
     handleClose();
   };
@@ -58,28 +53,24 @@ const [photoDesc, setPhotoDesc] = useState('');
 
   const handleUploadPhoto = async (event) => {
     event.preventDefault(); 
-
     const url = '/photos/create';
-
     const formData = new FormData();
     formData.append('album_id', albumId); 
     formData.append('image', selectedFile);
     formData.append('title', photoName);
     formData.append('description', photoDesc);
-
     const res = await customFetch(url, formData);
     const data = await res.json();
     setUploaded(data);
-  
     onCreate();
     handleClose();
+    console.log(uploaded);
   };
 
   const handleFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
   };
  
-
   return (
 <>
        {!isAlbum && (  
@@ -133,7 +124,6 @@ const [photoDesc, setPhotoDesc] = useState('');
             <input maxLength='30' name="albumDesc" placeholder="create album description" value={albumDesc} onChange={handleAlbumDescChange}/>  
             <Button className="btn btn-secondary" type="submit">Add</Button>
           </Form>
-    
         </ModalBody>
       </Modal>
     </>

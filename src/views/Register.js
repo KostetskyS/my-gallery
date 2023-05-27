@@ -21,12 +21,12 @@ function Register() {
             })
         } else {
             alert('Password mismatch')
-        }
-            
+        }      
     }
 
     return <div>    
         <Auth isLogin={false} submitHandler={submitHandler}/>  
     </div> 
 }
+
 export default Register

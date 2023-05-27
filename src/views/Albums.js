@@ -31,18 +31,19 @@ export const Albums = () => {
   }
 
   const deleteAlbum = async (albumId) => {
-  
     try {
-      const response = await deleteItem('/albums/delete', albumId);
-      console.log(response) 
-     
+      const body = {
+        album_id: albumId
+      };
+  
+      await deleteItem('/albums/delete', body);
+      await fetchAlbums();
     } catch (error) {
-      alert('Photos are not found');
+      alert('Albums are not found');
     } finally {
-      alert('dsad')
+      await fetchAlbums();
     }
-    
-  }
+  };
 
   useEffect(function() {fetchAlbums()}, []);
 

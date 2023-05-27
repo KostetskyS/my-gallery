@@ -26,23 +26,23 @@ export const Photos = () => {
     }
   }
 
-  const deletePhoto = async (photoId) => {
-  
-    try {
-      const response = await deleteItem('/photos/delete', photoId);
-      console.log(response) 
-     
-    } catch (error) {
-      alert('Photos are not found');
-    } finally {
-      
-    }
-    
+ const deletePhoto = async (photoId) => {
+  try {
+    const body = {
+      photo_id: photoId
+    };
+
+    await deleteItem('/photos/delete', body);
+    await fetchPhotos();
+  } catch (error) {
+    alert('Photos are not found');
+  } finally {
+    await fetchPhotos();
   }
+};
 
   useEffect(() => {fetchPhotos()}, []); 
   
-
   return (
     <Container className='photo-container'> 
       <Row className='addAlbums'>
