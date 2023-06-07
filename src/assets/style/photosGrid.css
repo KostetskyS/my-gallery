@@ -1,27 +1,110 @@
 .photo {
-    border: 1px solid rgba(61, 53, 53, 0.8);;
-    background-color: rgba(107, 97, 97, 0.35);
     margin: 40px;
     padding: 15px;
     margin-bottom: 40px;
     text-align: center;
-}
-.photo h4 {
+  }
+  
+  .photo h4 {
     font-size: 30px;
-}
-.photo p {
+  }
+  
+  .photo p {
     font-size: 20px;
-}
-.photoPic {
+  }
+  
+  .photoPic {
+    max-width: 200px;
     margin-bottom: 40px;
-    width: 400px;
     border-radius: 4px;
-}
-.btn-danger {
+  }
+  
+  .photoModal {
+    margin-bottom: 40px;
+    border-radius: 4px;
+  }
+  
+  .btn-danger {
     border-radius: 50px;
-}
-.trash {
+  }
+  
+  .trash {
     width: 55px;
     height: 30px;
     cursor: pointer;
-}
+  }
+  
+  .arrows {
+    display: flex;
+    justify-content: space-between;
+    width: 100px;
+    margin: 0 auto;
+    margin-bottom: 50px;
+    cursor: pointer;
+  }
+  
+  /* Медиа-запросы для адаптивности */
+  @media (max-width: 768px) {
+    .photo {
+      margin: 20px;
+      padding: 10px;
+      margin-bottom: 20px;
+    }
+  
+    .photo h4 {
+      font-size: 24px;
+    }
+  
+    .photo p {
+      font-size: 16px;
+    }
+  
+    .photoPic {
+      margin-bottom: 20px;
+      width: 200px;
+    }
+  
+    .photoModal {
+      margin-bottom: 20px;
+      width: 300px;
+      height: 300px;
+    }
+  
+    .arrows {
+      width: 60px;
+      margin-bottom: 30px;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .photo {
+      margin: 10px;
+      padding: 5px;
+      margin-bottom: 10px;
+    }
+  
+    .photo h4 {
+      font-size: 20px;
+    }
+  
+    .photo p {
+      font-size: 14px;
+    }
+  
+    .photoPic {
+      margin-bottom: 10px;
+      width: 150px;
+    }
+  
+    .photoModal {
+      margin-bottom: 10px;
+      width: 200px;
+      height: 200px;
+    }
+  
+    .arrows {
+      width: 40px;
+      margin-bottom: 20px;
+    }
+  }
+  

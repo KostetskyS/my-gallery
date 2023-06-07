@@ -3,6 +3,8 @@ import '../assets/style/logIn.css';
 import Auth from '../components/Auth';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
+import Toastify from 'toastify-js';
+import "toastify-js/src/toastify.css";
 
 function LogIn() {
     const navigate = useNavigate();
@@ -14,6 +16,14 @@ function LogIn() {
                 if(response.data.success) {
                     navigate('/');
                     localStorage.setItem('authToken', response.data.data.token);
+                } else {
+                    Toastify({
+                        text: "User not found",
+                        offset: {
+                          x: 50, 
+                          y: 10
+                        },
+                      }).showToast();
                 }
             }).catch(function(error){
                 alert('User is not found');

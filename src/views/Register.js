@@ -3,6 +3,8 @@ import '../assets/style/logIn.css';
 import Auth from '../components/Auth';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
+import Toastify from 'toastify-js';
+import "toastify-js/src/toastify.css";
 
 function Register() {
     const navigate = useNavigate();
@@ -15,6 +17,14 @@ function Register() {
                 console.log(response.data, "data")
                 if(response.data.success) {
                     navigate('/logIn');
+                } else {
+                    Toastify({
+                        text: "User already registered",
+                        offset: {
+                          x: 50, 
+                          y: 10
+                        },
+                      }).showToast();
                 }
             }).catch(function(error){
                 console.log(error)
