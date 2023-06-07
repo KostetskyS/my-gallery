@@ -26,7 +26,13 @@ function LogIn() {
                       }).showToast();
                 }
             }).catch(function(error){
-                alert('User is not found');
+                Toastify({
+                    text: "User not found",
+                    offset: {
+                      x: 50, 
+                      y: 10
+                    },
+                  }).showToast();
             })
             
     }

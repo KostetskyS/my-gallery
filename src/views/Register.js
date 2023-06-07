@@ -27,7 +27,13 @@ function Register() {
                       }).showToast();
                 }
             }).catch(function(error){
-                console.log(error)
+                Toastify({
+                    text: "User is already registered",
+                    offset: {
+                      x: 50, 
+                      y: 10
+                    },
+                  }).showToast();
             })
         } else {
             alert('Password mismatch')
